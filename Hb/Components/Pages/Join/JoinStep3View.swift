@@ -59,13 +59,13 @@ struct JoinStep3View: View {
                             self.isFocused = true
                         }
                     }
-                    .onChange(of: self.password) { [password] (newText) in
+                    .onChange(of: self.password) { [] (newText) in
                         self.disabled = newText == self.passwordConfirm ? false : true
                     }
                 SecureField("비밀번호를 다시 입력하세요.", text: $passwordConfirm)
                     .textFieldStyle(HbTextFieldStyle())
                     .padding(.bottom, 10)
-                    .onChange(of: self.passwordConfirm) { [passwordConfirm] (newText) in
+                    .onChange(of: self.passwordConfirm) { [] (newText) in
                         self.disabled = newText == self.password ? false : true
                     }
                 

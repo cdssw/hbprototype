@@ -120,14 +120,13 @@
 		4205F9C527D3446E00A2CCDE /* Hb */ = {
 			isa = PBXGroup;
 			children = (
+				42DAAA42291CB85600543A4D /* Components */,
 				4222334327FEB2B5001D880C /* Network */,
 				423EA18D27DDE91600250897 /* Environment */,
 				42737AC727DD88F800E105F6 /* Model */,
 				4255063527DC451B0022D4F3 /* Others */,
 				4255063327DC44FD0022D4F3 /* Styles */,
-				4205F9D527D34A6300A2CCDE /* Atomic */,
 				4205F9C627D3446E00A2CCDE /* HbApp.swift */,
-				4205F9D427D3465500A2CCDE /* Views */,
 				4205F9C827D3446E00A2CCDE /* ContentView.swift */,
 				4205F9CA27D3447000A2CCDE /* Assets.xcassets */,
 				4205F9CC27D3447000A2CCDE /* Preview Content */,
@@ -143,25 +142,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		4205F9D427D3465500A2CCDE /* Views */ = {
+		4205F9D427D3465500A2CCDE /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				42C9428A28068817009BF38C /* Contents */,
-				426C0FFC28053E98008AD102 /* Header */,
-				423EA18A27DDE86400250897 /* Home */,
+				423EA18B27DDE87D00250897 /* HomeView.swift */,
 				4258A7C427DB6AE9004B0AB9 /* Join */,
 				428E275327D45A5B00046988 /* IntroView.swift */,
 				428E275527D45B0F00046988 /* LoginView.swift */,
 			);
-			path = Views;
+			path = Pages;
 			sourceTree = "<group>";
 		};
 		4205F9D527D34A6300A2CCDE /* Atomic */ = {
 			isa = PBXGroup;
 			children = (
-				4255064227DC7C2B0022D4F3 /* FavoriteView.swift */,
 				42DCE7B127DB3E3F00CADFD1 /* HbBackButton.swift */,
-				42D0633F27FC0D67007AC9BD /* CardView.swift */,
 			);
 			path = Atomic;
 			sourceTree = "<group>";
@@ -173,15 +168,6 @@
 				4222334627FEB3E0001D880C /* Extension.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		423EA18A27DDE86400250897 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				423EA18B27DDE87D00250897 /* HomeView.swift */,
-				426C0FF828050693008AD102 /* MainView.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		423EA18D27DDE91600250897 /* Environment */ = {
@@ -230,14 +216,6 @@
 			path = Join;
 			sourceTree = "<group>";
 		};
-		426C0FFC28053E98008AD102 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				426C0FFD28053EA7008AD102 /* HeaderView.swift */,
-			);
-			path = Header;
-			sourceTree = "<group>";
-		};
 		42737AC727DD88F800E105F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,12 +233,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		42C9428A28068817009BF38C /* Contents */ = {
+		42DAAA42291CB85600543A4D /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				42C9428B28068826009BF38C /* ContentsView.swift */,
+				42DAAA44291CB8FF00543A4D /* Organisms */,
+				42DAAA43291CB8A500543A4D /* Molecules */,
+				4205F9D527D34A6300A2CCDE /* Atomic */,
+				4205F9D427D3465500A2CCDE /* Pages */,
 			);
-			path = Contents;
+			path = Components;
+			sourceTree = "<group>";
+		};
+		42DAAA43291CB8A500543A4D /* Molecules */ = {
+			isa = PBXGroup;
+			children = (
+				426C0FFD28053EA7008AD102 /* HeaderView.swift */,
+				42D0633F27FC0D67007AC9BD /* CardView.swift */,
+			);
+			path = Molecules;
+			sourceTree = "<group>";
+		};
+		42DAAA44291CB8FF00543A4D /* Organisms */ = {
+			isa = PBXGroup;
+			children = (
+				426C0FF828050693008AD102 /* MainView.swift */,
+				42C9428B28068826009BF38C /* ContentsView.swift */,
+				4255064227DC7C2B0022D4F3 /* FavoriteView.swift */,
+			);
+			path = Organisms;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

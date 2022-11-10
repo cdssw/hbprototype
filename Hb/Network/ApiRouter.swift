@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 
+// URLRequestConvertible 프로토콜을 구현
 class APIRouter: URLRequestConvertible {
     // 1. APIType 정의
     enum APIType {
@@ -33,6 +34,8 @@ class APIRouter: URLRequestConvertible {
     var parameters: Data?
     var apiType: APIType
     
+    // Rest호출시 ApiRouter를 생성하고 request를 호출한다.
+    // 생성자
     init(path: String, httpMethod: HTTPMethod? = .get, parameters: Data? = nil, apiType: APIType = .service) {
         self.path = path
         self.httpMethod = httpMethod ?? .get
@@ -40,17 +43,22 @@ class APIRouter: URLRequestConvertible {
         self.apiType = apiType
     }
     
+    // AF.request()를 호출하면 아래 함수가 호출
     func asURLRequest() throws -> URLRequest {
         // 2. base URL + path
         let fullURL = apiType.baseURL + path
+        // url encoding 처리 후 string 리턴
         let encodedURL = fullURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        // url string을 기반으로 URLComponent를 생성
         var urlComponent = URLComponents(string: encodedURL)!
         
-        // 3. get > query param 추가
+        // 3. get이면 query parameter를 셋팅한다.
         if httpMethod == .get, let params = parameters {
             if let dictionary = try? JSONSerialization.jsonObject(with: params, options: []) as? [String: Any] {
+                // URLQueryItem 배열을 만들고 받은 파라메터를 encoding하여 설정한다.
                 var queries = [URLQueryItem]()
                 for (name, value) in dictionary {
+                    // RFC3896을 따르는 encoding 처리
                     let encodedValue = "\(value)".addingPercentEncodingForRFC3986()
                     let queryItem = URLQueryItem(name: name, value: encodedValue)
                     queries.append(queryItem)
@@ -62,12 +70,11 @@ class APIRouter: URLRequestConvertible {
         // 4. request 생성
         var request = try URLRequest(url: urlComponent.url!, method: httpMethod)
         
-        // 5. post > json param 추가
+        // 5. post이면 json param 추가
         if httpMethod == .post, let params = parameters {
             request.httpBody = params
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
-        
         
         // 6. print to console
         print("[REQUEST]")

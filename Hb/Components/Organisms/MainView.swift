@@ -17,7 +17,6 @@ struct MainView: View{
                 ScrollView {
                     LazyVStack {
                         ForEach(Array(zip(meetViewModel.meetList.indices, meetViewModel.meetList)), id:\.0) { index, meet in
-                            
                             NavigationLink(destination: ContentsView()) {
                                 CardView(meet: meet)
                                     .onAppear {

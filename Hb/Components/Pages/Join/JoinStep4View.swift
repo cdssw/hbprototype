@@ -59,7 +59,7 @@ struct JoinStep4View: View {
                             self.isFocused = true
                         }
                     }
-                    .onChange(of: self.userNm) { [userNm] (newText) in
+                    .onChange(of: self.userNm) { [] (newText) in
                         self.disabled = newText != "" && self.phoneNo != "" ? false : true
                     }
                     .padding(.bottom, 10)
@@ -74,7 +74,7 @@ struct JoinStep4View: View {
                 TextField("휴대폰번호를 입력하세요.", text: $phoneNo)
                     .keyboardType(.numberPad)
                     .textFieldStyle(HbTextFieldStyle())
-                    .onChange(of: self.phoneNo) { [phoneNo] (newText) in
+                    .onChange(of: self.phoneNo) { [] (newText) in
                         self.disabled = newText != "" && self.userNm != "" ? false : true
                     }
                     .padding(.bottom, 10)

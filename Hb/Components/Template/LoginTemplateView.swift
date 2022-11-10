@@ -1,13 +1,13 @@
 //
-//  LoginView.swift
+//  LoginTemplateView.swift
 //  Hb
 //
-//  Created by DaeWan Choi on 2022/03/06.
+//  Created by DaeWan Choi on 2022/11/10.
 //
 
 import SwiftUI
 
-struct LoginView: View {
+struct LoginTemplateView: View {
     @EnvironmentObject var userInfo: UserInfo
     @State private var username: String = ""
     @State private var password: String = ""
@@ -57,7 +57,10 @@ struct LoginView: View {
                 Spacer().frame(height: 30)
                 Button(action: {
                     self.userInfo.isLogged = true
-                    UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
+                    let scenes = UIApplication.shared.connectedScenes
+                    let windowScene = scenes.first as? UIWindowScene
+                    let window = windowScene?.windows.first
+                    window?.rootViewController?.dismiss(animated: true)
                 }) {
                     Text("로그인")
                         .fontWeight(.bold)
@@ -65,7 +68,7 @@ struct LoginView: View {
                 .buttonStyle(HbButtonStyleFill())
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            .animation(.default)
+            .animation(.default, value: UUID())
             .padding(.bottom, isFocused ? keyboardHandler.keyboardHeight : 100)
         }
         .ignoresSafeArea()
@@ -74,9 +77,8 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct LoginTemplateView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
-            .environmentObject(UserInfo())
+        LoginTemplateView()
     }
 }

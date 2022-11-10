@@ -18,6 +18,7 @@ class MeetViewModel: ObservableObject {
     
     init() {
         print(#fileID, #function, #line, "")
+        // 생성자가 호출되면 바로 데이터를 조회
         let paging: Paging = Paging(page: self.page)
         getMeetList(paging)
     }

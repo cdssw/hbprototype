@@ -21,7 +21,6 @@ struct JoinFinishView: View {
                 .multilineTextAlignment(.center)
             Spacer()
             Button(action: {
-                UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
             }, label: {
                 Text("로그인")
                     .fontWeight(.bold)
