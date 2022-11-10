@@ -36,7 +36,6 @@ struct HeaderView: View {
             }
             .padding(EdgeInsets(top: 5, leading: 16, bottom: 5, trailing: 16))
             Divider()
-                .padding(EdgeInsets(top: 0, leading: 16, bottom: 5, trailing: 16))
         }
     }
 }

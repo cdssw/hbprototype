@@ -26,7 +26,6 @@ struct HomeView: View {
                     .fill(.clear)
                     .frame(height: 10)
                     .overlay(Divider(), alignment: .top)
-                    .padding([.leading, .trailing])
             }
             .tabItem {
                 GeometryReader { geometry in
@@ -40,7 +39,6 @@ struct HomeView: View {
                     .fill(.clear)
                     .frame(height: 10)
                     .overlay(Divider(), alignment: .top)
-                    .padding([.leading, .trailing])
             }
             .tabItem {
                 GeometryReader { geometry in
@@ -54,7 +52,6 @@ struct HomeView: View {
                     .fill(.clear)
                     .frame(height: 10)
                     .overlay(Divider(), alignment: .top)
-                    .padding([.leading, .trailing])
             }
             .tabItem {
                 GeometryReader { geometry in
@@ -68,7 +65,6 @@ struct HomeView: View {
                     .fill(.clear)
                     .frame(height: 10)
                     .overlay(Divider(), alignment: .top)
-                    .padding([.leading, .trailing])
             }
             .tabItem {
                 GeometryReader { geometry in
