@@ -10,5 +10,16 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #2 in MeetViewModel.getMeetList(_:):MeetViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.page">
+            </PersistentString>
+            <PersistentString
+               value = "result.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -11,6 +11,10 @@ class UserInfo: ObservableObject {
     @Published var isLogged: Bool = false
 }
 
+class Constant {
+    static let IMAGE_SERVER = "https://img-server.duckdns.org/images/"
+}
+
 enum EnvironmentMode {
     case dev
     case stg

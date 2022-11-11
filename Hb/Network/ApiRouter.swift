@@ -1,7 +1,7 @@
 //
 //  ApiRouter.swift
 //  Hb
-//
+//  URLRequest를 생성한다.
 //  Created by DaeWan Choi on 2022/04/07.
 //
 
@@ -34,7 +34,6 @@ class APIRouter: URLRequestConvertible {
     var parameters: Data?
     var apiType: APIType
     
-    // Rest호출시 ApiRouter를 생성하고 request를 호출한다.
     // 생성자
     init(path: String, httpMethod: HTTPMethod? = .get, parameters: Data? = nil, apiType: APIType = .service) {
         self.path = path
@@ -43,7 +42,7 @@ class APIRouter: URLRequestConvertible {
         self.apiType = apiType
     }
     
-    // AF.request()를 호출하면 아래 함수가 호출
+    // URLRequest를 생성
     func asURLRequest() throws -> URLRequest {
         // 2. base URL + path
         let fullURL = apiType.baseURL + path
