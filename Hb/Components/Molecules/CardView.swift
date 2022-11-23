@@ -39,9 +39,7 @@ struct CardView: View {
                             .foregroundColor(Color(0x797979))
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
                         HStack(spacing: 3) {
-                            Image(systemName: "timer")
-                                .font(.caption)
-                                .foregroundColor(Color(0x797979))
+                            Image("watch")
                             Text("\(meet.term.startTm)~\(meet.term.endTm)")
                                 .font(.caption)
                                 .foregroundColor(Color(0x797979))
@@ -61,17 +59,13 @@ struct CardView: View {
                                 )
                             Spacer()
                             HStack(spacing: 3) {
-                                Image(systemName: "message")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color(0x797979))
+                                Image("chat")
                                 Text("\(meet.chatCnt)")
                                     .font(.subheadline)
                                     .foregroundColor(Color(0x797979))
                             }
                             HStack(spacing: 3) {
-                                Image(systemName: "person.badge.plus")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color(0x797979))
+                                Image("add_account")
                                 Text("\(meet.recruitment)")
                                     .font(.subheadline)
                                     .foregroundColor(Color(0x797979))

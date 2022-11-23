@@ -16,6 +16,7 @@
 		4222334527FEB2C7001D880C /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334427FEB2C7001D880C /* ApiRouter.swift */; };
 		4222334727FEB3E0001D880C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334627FEB3E0001D880C /* Extension.swift */; };
 		4222334927FEB49F001D880C /* Meet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334827FEB49F001D880C /* Meet.swift */; };
+		422CDC1B292DDADC00100971 /* CustomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422CDC1A292DDADC00100971 /* CustomExtension.swift */; };
 		423EA18C27DDE87D00250897 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EA18B27DDE87D00250897 /* HomeView.swift */; };
 		423EA19027DDE93300250897 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EA18F27DDE93300250897 /* Environment.swift */; };
 		4255063727DC455F0022D4F3 /* JoinStep2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4255063627DC455F0022D4F3 /* JoinStep2View.swift */; };
@@ -60,6 +61,7 @@
 		4222334427FEB2C7001D880C /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		4222334627FEB3E0001D880C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		4222334827FEB49F001D880C /* Meet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meet.swift; sourceTree = "<group>"; };
+		422CDC1A292DDADC00100971 /* CustomExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtension.swift; sourceTree = "<group>"; };
 		423EA18B27DDE87D00250897 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		423EA18F27DDE93300250897 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		4255063627DC455F0022D4F3 /* JoinStep2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinStep2View.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				42DEC43128000F8500792326 /* Helper.swift */,
 				426C0FFA280534CE008AD102 /* ViewRouter.swift */,
 				426C0FFF2805590C008AD102 /* ObservableScrollView.swift */,
+				422CDC1A292DDADC00100971 /* CustomExtension.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				4258A7C827DB7674004B0AB9 /* JoinStep1View.swift in Sources */,
 				426C0FF928050693008AD102 /* MainView.swift in Sources */,
 				4222334727FEB3E0001D880C /* Extension.swift in Sources */,
+				422CDC1B292DDADC00100971 /* CustomExtension.swift in Sources */,
 				426C0FFE28053EA7008AD102 /* HeaderView.swift in Sources */,
 				42929271291E169900B163FB /* FileService.swift in Sources */,
 				4255063F27DC777C0022D4F3 /* JoinStep4View.swift in Sources */,

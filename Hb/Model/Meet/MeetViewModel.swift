@@ -14,17 +14,11 @@ class MeetViewModel: ObservableObject {
     
     @Published var meetList = [Meet]()
     @Published var page: Int = 0
-    
-    init() {
-        print(#fileID, #function, #line, "")
-        // 생성자가 호출되면 바로 데이터를 조회
-        let paging: Paging = Paging(page: self.page)
-        getMeetList(paging)
-    }
+    @Published var meet: Meet?
     
     func getMeetList(_ paging: Paging) {
         let listCount = self.meetList.count
-        MeetService.getMeetList(paging).eraseToAnyPublisher()
+        MeetService.getMeetList(paging)
             .sink { completion in
                 switch completion {
                 case .failure(let error):
@@ -54,6 +48,20 @@ class MeetViewModel: ObservableObject {
                         }
                     }
                 }
+            }.store(in: &subscription)
+    }
+    
+    func getMeet(_ id: Int) {
+        MeetService.getMeet(id)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print(#fileID, #function, #line, "error: \(error)")
+                case .finished:
+                    print(#fileID, #function, #line, "finished")
+                }
+            } receiveValue: { meet in
+                self.meet = meet
             }.store(in: &subscription)
     }
 }

@@ -21,4 +21,15 @@ enum MeetService {
             })
             .eraseToAnyPublisher()
     }
+    
+    static func getMeet(_ id: Int) -> AnyPublisher<Meet, Error> {
+        let router = APIRouter(path: MeetPath.meet+"\(id)", httpMethod: .get, parameters: nil, apiType: .service)
+        return AF.request(router)
+            .publishDecodable(type: Meet.self)
+            .value()
+            .mapError({ (afError: AFError) in
+                return afError as Error
+            })
+            .eraseToAnyPublisher()
+    }
 }

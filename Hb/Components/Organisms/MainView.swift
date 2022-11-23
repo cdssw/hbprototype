@@ -11,6 +11,13 @@ struct MainView: View{
     // 로딩시 데이터 조회
     @ObservedObject var meetViewModel = MeetViewModel()
     
+    init() {
+        print(#fileID, #function, #line, "")
+        // 생성자가 호출되면 바로 데이터를 조회
+        let paging: Paging = Paging(page: meetViewModel.page)
+        meetViewModel.getMeetList(paging)
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -18,7 +25,7 @@ struct MainView: View{
                 ScrollView {
                     LazyVStack {
                         ForEach(Array(zip(meetViewModel.meetList.indices, meetViewModel.meetList)), id:\.0) { index, meet in
-                            NavigationLink(destination: ContentsView()) {
+                            NavigationLink(destination: ContentsView(meet: meet)) {
                                 CardView(meet: meet)
                                     .onAppear {
                                         // 마지막 index가 표시되면 다음 페이지를 로딩한다.
