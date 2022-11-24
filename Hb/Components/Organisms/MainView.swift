@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MainView: View{
-    // 로딩시 데이터 조회
     @ObservedObject var meetViewModel = MeetViewModel()
     
     init() {

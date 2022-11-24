@@ -14,31 +14,69 @@ struct ContentsView: View {
     @State private var isFocused: Bool = false
     @FocusState private var focusedField: FocusField?
     @ObservedObject var meetViewModel = MeetViewModel()
-    
+    @State var show: Bool = false
+    let appearance = UINavigationBarAppearance()
+   
+    init(meet: Meet) {
+        self.meet = meet
+        
+        if self.show == false {
+            // 네비게이션바 투명처리
+            appearance.configureWithTransparentBackground()
+            appearance.backgroundColor = .clear
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        } else {
+            appearance.configureWithDefaultBackground()
+            appearance.backgroundColor = .systemBackground
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
+    }
     var body: some View {
         return ZStack {
-            VStack {
-                UserWithCost(meet: meet)
-                Divider()
-                TitleWithMessageAndAppl(meet: meet)
-                TimeAndLocation(meet: meet)
-                HStack {
-                    Text(meet.content)
-                        .foregroundColor(Color(0x797979))
-                        .font(.body)
-                    Spacer()
+            ScrollView {
+                VStack {
+                    ImageSlider().frame(height: 300)
+                    VStack {
+                        UserWithCost(meet: meet)
+                        Divider()
+                        TitleWithMessageAndAppl(meet: meet)
+                        TimeAndLocation(meet: meet)
+                        HStack {
+                            Text(meet.content)
+                                .foregroundColor(Color(0x797979))
+                                .font(.body)
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                    .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
+                    GeometryReader { proxy in
+                        let offset = proxy.frame(in: .named("scroll")).minY
+                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
+                    }
                 }
-                Spacer()
             }
-            .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
+            .coordinateSpace(name: "scroll")
+            .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
+                if value < 400 {
+                    print(value)
+                    self.show = true
+                } else {
+                    self.show = false
+                }
+            }
         }
+        .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: HbBackButton())
-        .navigationBarTitle("상세보기")
+        .navigationBarItems(leading: HbBackButton(imageYn: true))
+        .navigationBarTitle(meet.imgList.count==0 ? "" : "상세보기")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             self.meetViewModel.getMeet(meet.id)
         }
+        .id(self.show)
     }
 }
 
@@ -47,7 +85,22 @@ struct UserWithCost: View {
     
     var body: some View {
         HStack {
-            Image("avatar")
+            if let avatar = meet.user.avatarPath {
+                let path = Constant.IMAGE_SERVER + avatar
+                AsyncImage(url: URL(string: path)) { image in
+                    image.resizable()
+                } placeholder: {
+                    Text("")
+                }
+                .frame(width: 40, height: 40)
+                .clipShape(RoundedRectangle(cornerRadius: 50))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 50)
+                        .stroke(Color(0xD3D3D3), lineWidth: 2)
+                )
+            } else {
+                Image("avatar")
+            }
             Text(meet.user.userNickNm)
                 .font(.body)
                 .fontWeight(.bold)

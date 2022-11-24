@@ -75,7 +75,7 @@ struct User: Codable {
     var avatarPath: String?
     
     static func getDummy() -> Self {
-        return User(inputDt: "2022-10-11 10:13:49", modifyDt: "2022-10-11 10:13:49", id: 2, username: "test@test.com", userNm: "테스터", userNickNm: "테스터닉네임", phone: "010-3333-2234")
+        return User(inputDt: "2022-10-11 10:13:49", modifyDt: "2022-10-11 10:13:49", id: 2, username: "test@test.com", userNm: "테스터", userNickNm: "테스터닉네임", phone: "010-3333-2234", avatarPath: "avatar/2022-11-23/b74fd2f1-d7fe-409b-92af-67f9fa94c688.jpg")
     }
 }
 
