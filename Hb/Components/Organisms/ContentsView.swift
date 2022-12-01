@@ -8,36 +8,66 @@
 import SwiftUI
 
 struct ContentsView: View {
-    var meet: Meet
     @EnvironmentObject var userInfo: UserInfo
     @StateObject private var keyboardHandler = KeyboardHandler()
-    @State private var isFocused: Bool = false
     @FocusState private var focusedField: FocusField?
     @ObservedObject var meetViewModel = MeetViewModel()
-    @State var show: Bool = false
-    let appearance = UINavigationBarAppearance()
-   
-    init(meet: Meet) {
-        self.meet = meet
-        
-        if self.show == false {
-            // 네비게이션바 투명처리
-            appearance.configureWithTransparentBackground()
-            appearance.backgroundColor = .clear
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        } else {
-            appearance.configureWithDefaultBackground()
-            appearance.backgroundColor = .systemBackground
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    @State private var isImage: Bool = true
+    
+    var meet: Meet
+    
+    var body: some View {
+        ZStack {
+            // image가 있으면 image 표시 적용된 ContentMeet 표시
+            if self.meet.imgList.count > 0 {
+                ContentMeet(meet: meet, isImage: $isImage)
+                    .ignoresSafeArea()
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: HbBackButton(imageYn: self.isImage))
+                    .navigationBarTitle("")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .onAppear {
+                        self.meetViewModel.getMeet(meet.id)
+                    }
+                    .navigationBarBackground {
+                        // 네비게이션 배경을 image 표시영역에 따른 변경처리
+                        if self.isImage {
+                            Color.clear
+                        } else {
+                            Color.white
+                        }
+                    }
+            } else {
+                // image가 없으면 일반 형식으로 표시
+                ContentMeet(meet: meet, isImage: $isImage)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: HbBackButton(imageYn: self.isImage))
+                    .navigationBarTitle("상세보기")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .onAppear {
+                        self.meetViewModel.getMeet(meet.id)
+                    }
+                    .navigationBarBackground {
+                        // 배경은 흰색으로 고정
+                        Color.white
+                    }
+            }
         }
     }
+}
+
+struct ContentMeet: View {
+    var meet: Meet
+    @Binding var isImage: Bool
+    
     var body: some View {
-        return ZStack {
+        ZStack {
             ScrollView {
                 VStack {
-                    ImageSlider().frame(height: 300)
+                    // image 존재여부에 따른 ImageSlider 표시
+                    if self.meet.imgList.count > 0 {
+                        ImageSlider().frame(height: 400)
+                    }
                     VStack {
                         UserWithCost(meet: meet)
                         Divider()
@@ -53,30 +83,22 @@ struct ContentsView: View {
                     }
                     .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
                     GeometryReader { proxy in
+                        // 스크롤의 현재 offset을 구해옴
                         let offset = proxy.frame(in: .named("scroll")).minY
                         Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                     }
                 }
             }
-            .coordinateSpace(name: "scroll")
+            .coordinateSpace(name: "scroll") // scroll offset조절을 위한 이름 정의
             .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
+                // scroll이 변경될때마다 체크하여 네비게이션 배경색 변경처리를 위한 변수 수정
                 if value < 400 {
-                    print(value)
-                    self.show = true
+                    self.isImage = false
                 } else {
-                    self.show = false
+                    self.isImage = true
                 }
             }
         }
-        .ignoresSafeArea()
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: HbBackButton(imageYn: true))
-        .navigationBarTitle(meet.imgList.count==0 ? "" : "상세보기")
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            self.meetViewModel.getMeet(meet.id)
-        }
-        .id(self.show)
     }
 }
 

@@ -50,6 +50,7 @@
 		42DCE7B227DB3E4000CADFD1 /* HbBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DCE7B127DB3E3F00CADFD1 /* HbBackButton.swift */; };
 		42DEC43228000F8500792326 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DEC43128000F8500792326 /* Helper.swift */; };
 		42E15C8127FEB7E5000A3EE4 /* MeetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E15C8027FEB7E5000A3EE4 /* MeetViewModel.swift */; };
+		42E427CE2938292400B202B6 /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E427CD2938292400B202B6 /* NavigationBarModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		42DCE7B127DB3E3F00CADFD1 /* HbBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HbBackButton.swift; sourceTree = "<group>"; };
 		42DEC43128000F8500792326 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		42E15C8027FEB7E5000A3EE4 /* MeetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetViewModel.swift; sourceTree = "<group>"; };
+		42E427CD2938292400B202B6 /* NavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				426C0FFA280534CE008AD102 /* ViewRouter.swift */,
 				426C0FFF2805590C008AD102 /* ObservableScrollView.swift */,
 				422CDC1A292DDADC00100971 /* CustomExtension.swift */,
+				42E427CD2938292400B202B6 /* NavigationBarModifier.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				428E275427D45A5C00046988 /* IntroView.swift in Sources */,
 				42DEC43228000F8500792326 /* Helper.swift in Sources */,
 				422CDC1F292E089800100971 /* ImageList.swift in Sources */,
+				42E427CE2938292400B202B6 /* NavigationBarModifier.swift in Sources */,
 				428E275627D45B0F00046988 /* LoginView.swift in Sources */,
 				427D86C727FFCBC9002B1B8D /* File.swift in Sources */,
 				426C10002805590C008AD102 /* ObservableScrollView.swift in Sources */,
