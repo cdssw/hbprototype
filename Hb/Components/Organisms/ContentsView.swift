@@ -59,34 +59,54 @@ struct ContentsView: View {
 struct ContentMeet: View {
     var meet: Meet
     @Binding var isImage: Bool
+    @State private var offsetY: CGFloat = .zero
+    
+    func setOffset(offset: CGFloat) -> some View {
+        DispatchQueue.main.async {
+            self.offsetY = offset
+        }
+        return EmptyView()
+    }
     
     var body: some View {
         ZStack {
             ScrollView {
-                VStack {
-                    // image 존재여부에 따른 ImageSlider 표시
-                    if self.meet.imgList.count > 0 {
-                        ImageSlider().frame(height: 400)
-                    }
-                    VStack {
-                        UserWithCost(meet: meet)
-                        Divider()
-                        TitleWithMessageAndAppl(meet: meet)
-                        TimeAndLocation(meet: meet)
-                        HStack {
-                            Text(meet.content)
-                                .foregroundColor(Color(0x797979))
-                                .font(.body)
-                            Spacer()
+                // image 존재여부에 따른 ImageSlider 표시
+                if self.meet.imgList.count > 0 {
+                    GeometryReader { geometry in
+                        let offset = geometry.frame(in: .global).minY
+                        setOffset(offset: offset)
+                        ZStack {
+                            ImageSlider()
                         }
+                        .frame(
+                            width: geometry.size.width,
+                            height: 400 + (offset > 0 ? offset : 0)
+                        )
+                        .offset(
+                            y: (offset > 0 ? -offset: 0)
+                        )
+                    }
+                    .frame(minHeight: 400)
+                }
+                VStack {
+                    UserWithCost(meet: meet)
+                    Divider()
+                    TitleWithMessageAndAppl(meet: meet)
+                    TimeAndLocation(meet: meet)
+                    HStack {
+                        Text(meet.content)
+                            .foregroundColor(Color(0x797979))
+                            .font(.body)
                         Spacer()
                     }
-                    .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
-                    GeometryReader { proxy in
-                        // 스크롤의 현재 offset을 구해옴
-                        let offset = proxy.frame(in: .named("scroll")).minY
-                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
-                    }
+                    Spacer()
+                }
+                .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
+                GeometryReader { geometry in
+                    // 스크롤의 현재 offset을 구해옴
+                    let offset = geometry.frame(in: .named("scroll")).minY
+                    Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                 }
             }
             .coordinateSpace(name: "scroll") // scroll offset조절을 위한 이름 정의
@@ -98,6 +118,14 @@ struct ContentMeet: View {
                     self.isImage = true
                 }
             }
+            .overlay(
+                Rectangle()
+                    .foregroundColor(.black)
+                    .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(offsetY > -400 ? 0 : 1)
+                , alignment: .top
+            )
         }
     }
 }
