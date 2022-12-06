@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct ImageSlider: View {
+    @State var index = 0
     private let images = [Constant.IMAGE_SERVER + "avatar/2022-11-23/b74fd2f1-d7fe-409b-92af-67f9fa94c688.jpg", Constant.IMAGE_SERVER + "avatar/2022-11-23/b74fd2f1-d7fe-409b-92af-67f9fa94c688.jpg"]
     
     @State private var page = 0
+    @State private var bounce: Bool = false
     
     var body: some View {
-        TabView(selection: $page) {
-            ForEach(0..<images.count, id:\.self) { index in
-                AsyncImage(url: URL(string: images[index])) { image in
-                    image
-                        .resizable()
+        ImageSliderModifier(index: $index.animation(), maxIndex: images.count - 1) {
+            ForEach(self.images, id: \.self) { image in
+                AsyncImage(url: URL(string: image)) { img in
+                    img.resizable()
                         .aspectRatio(contentMode: .fill)
                 } placeholder: {
                     Text("")
-                }.tag(index)
+                }
             }
         }
-        .tabViewStyle(PageTabViewStyle())
     }
 }
 

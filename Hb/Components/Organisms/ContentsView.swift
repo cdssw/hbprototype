@@ -61,13 +61,6 @@ struct ContentMeet: View {
     @Binding var isImage: Bool
     @State private var offsetY: CGFloat = .zero
     
-    func setOffset(offset: CGFloat) -> some View {
-        DispatchQueue.main.async {
-            self.offsetY = offset
-        }
-        return EmptyView()
-    }
-    
     var body: some View {
         ZStack {
             ScrollView {
@@ -75,10 +68,7 @@ struct ContentMeet: View {
                 if self.meet.imgList.count > 0 {
                     GeometryReader { geometry in
                         let offset = geometry.frame(in: .global).minY
-                        setOffset(offset: offset)
-                        ZStack {
-                            ImageSlider()
-                        }
+                        ImageSlider()
                         .frame(
                             width: geometry.size.width,
                             height: 400 + (offset > 0 ? offset : 0)

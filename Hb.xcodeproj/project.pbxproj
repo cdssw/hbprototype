@@ -16,6 +16,7 @@
 		4222334527FEB2C7001D880C /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334427FEB2C7001D880C /* ApiRouter.swift */; };
 		4222334727FEB3E0001D880C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334627FEB3E0001D880C /* Extension.swift */; };
 		4222334927FEB49F001D880C /* Meet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334827FEB49F001D880C /* Meet.swift */; };
+		422998F5293ECDBB00B84414 /* ImageSliderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422998F4293ECDBB00B84414 /* ImageSliderModifier.swift */; };
 		422CDC1B292DDADC00100971 /* CustomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422CDC1A292DDADC00100971 /* CustomExtension.swift */; };
 		422CDC1D292E071100100971 /* ImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422CDC1C292E071100100971 /* ImageSlider.swift */; };
 		422CDC1F292E089800100971 /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422CDC1E292E089800100971 /* ImageList.swift */; };
@@ -38,7 +39,6 @@
 		427713B627D874E30001E900 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427713B527D874E30001E900 /* KeyboardHandler.swift */; };
 		42793DB527D62E6B00B6B9F9 /* KeyboardDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42793DB427D62E6B00B6B9F9 /* KeyboardDismiss.swift */; };
 		427D86C727FFCBC9002B1B8D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D86C627FFCBC9002B1B8D /* File.swift */; };
-		42815F4D27FD21E7003CBEC2 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 42815F4C27FD21E7003CBEC2 /* URLImage */; };
 		428E275427D45A5C00046988 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428E275327D45A5B00046988 /* IntroView.swift */; };
 		428E275627D45B0F00046988 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428E275527D45B0F00046988 /* LoginView.swift */; };
 		428E275A27D45D3400046988 /* HbTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428E275927D45D3400046988 /* HbTextFieldStyle.swift */; };
@@ -64,6 +64,7 @@
 		4222334427FEB2C7001D880C /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		4222334627FEB3E0001D880C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		4222334827FEB49F001D880C /* Meet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meet.swift; sourceTree = "<group>"; };
+		422998F4293ECDBB00B84414 /* ImageSliderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSliderModifier.swift; sourceTree = "<group>"; };
 		422CDC1A292DDADC00100971 /* CustomExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtension.swift; sourceTree = "<group>"; };
 		422CDC1C292E071100100971 /* ImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlider.swift; sourceTree = "<group>"; };
 		422CDC1E292E089800100971 /* ImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42815F4D27FD21E7003CBEC2 /* URLImage in Frameworks */,
 				42D0633E27FC0C59007AC9BD /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +264,7 @@
 				42D0633F27FC0D67007AC9BD /* CardView.swift */,
 				422CDC1C292E071100100971 /* ImageSlider.swift */,
 				422CDC1E292E089800100971 /* ImageList.swift */,
+				422998F4293ECDBB00B84414 /* ImageSliderModifier.swift */,
 			);
 			path = Molecules;
 			sourceTree = "<group>";
@@ -315,7 +316,6 @@
 			name = Hb;
 			packageProductDependencies = (
 				42D0633D27FC0C59007AC9BD /* Alamofire */,
-				42815F4C27FD21E7003CBEC2 /* URLImage */,
 			);
 			productName = Hb;
 			productReference = 4205F9C327D3446E00A2CCDE /* Hb.app */;
@@ -347,7 +347,6 @@
 			mainGroup = 4205F9BA27D3446E00A2CCDE;
 			packageReferences = (
 				42D0633C27FC0C59007AC9BD /* XCRemoteSwiftPackageReference "Alamofire" */,
-				42D0634127FC0DAA007AC9BD /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 4205F9C427D3446E00A2CCDE /* Products */;
 			projectDirPath = "";
@@ -392,6 +391,7 @@
 				42DCE7B227DB3E4000CADFD1 /* HbBackButton.swift in Sources */,
 				4258A7C827DB7674004B0AB9 /* JoinStep1View.swift in Sources */,
 				426C0FF928050693008AD102 /* MainView.swift in Sources */,
+				422998F5293ECDBB00B84414 /* ImageSliderModifier.swift in Sources */,
 				4222334727FEB3E0001D880C /* Extension.swift in Sources */,
 				422CDC1B292DDADC00100971 /* CustomExtension.swift in Sources */,
 				426C0FFE28053EA7008AD102 /* HeaderView.swift in Sources */,
@@ -631,22 +631,9 @@
 				kind = branch;
 			};
 		};
-		42D0634127FC0DAA007AC9BD /* XCRemoteSwiftPackageReference "url-image" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		42815F4C27FD21E7003CBEC2 /* URLImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 42D0634127FC0DAA007AC9BD /* XCRemoteSwiftPackageReference "url-image" */;
-			productName = URLImage;
-		};
 		42D0633D27FC0C59007AC9BD /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 42D0633C27FC0C59007AC9BD /* XCRemoteSwiftPackageReference "Alamofire" */;

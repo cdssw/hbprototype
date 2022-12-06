@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import URLImage
 
 struct CardView: View {
     var meet: Meet

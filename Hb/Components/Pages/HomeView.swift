@@ -14,7 +14,8 @@ struct HomeView: View {
     
     init(viewRouter: ViewRouter) {
         _viewRouter = StateObject(wrappedValue: viewRouter)
-        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().barTintColor = .white
+        UITabBar.appearance().clipsToBounds = true // tabbar에서 border를 숨김
     }
     
     var body: some View {
@@ -29,7 +30,7 @@ struct HomeView: View {
             }
             .tabItem {
                 GeometryReader { geometry in
-                    TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width/5, height: geometry.size.height/35, systemIconName: "house")
+                    TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width/5, height: geometry.size.height/35, systemIconName: "house", tabName: "홈")
                 }
             }
             VStack {
@@ -42,7 +43,7 @@ struct HomeView: View {
             }
             .tabItem {
                 GeometryReader { geometry in
-                    TabBarIcon(viewRouter: viewRouter, assignedPage: .liked, width: geometry.size.width/5, height: geometry.size.height/35, systemIconName: "star")
+                    TabBarIcon(viewRouter: viewRouter, assignedPage: .liked, width: geometry.size.width/5, height: geometry.size.height/35, systemIconName: "star", tabName: "관심목록")
                 }
             }
             VStack {
@@ -55,7 +56,7 @@ struct HomeView: View {
             }
             .tabItem {
                 GeometryReader { geometry in
-                    TabBarIcon(viewRouter: viewRouter, assignedPage: .chat, width: geometry.size.width/5, height: geometry.size.height/35, systemIconName: "message")
+                    TabBarIcon(viewRouter: viewRouter, assignedPage: .chat, width: geometry.size.width/5, height: geometry.size.height/35, systemIconName: "message", tabName: "채팅")
                 }
             }
             VStack {
@@ -68,10 +69,11 @@ struct HomeView: View {
             }
             .tabItem {
                 GeometryReader { geometry in
-                    TabBarIcon(viewRouter: viewRouter, assignedPage: .user, width: geometry.size.width/5, height: geometry.size.height/35, systemIconName: "person")
+                    TabBarIcon(viewRouter: viewRouter, assignedPage: .user, width: geometry.size.width/5, height: geometry.size.height/35, systemIconName: "person", tabName: "사용자")
                 }
             }
         }
+        .accentColor(Color(0x00AF31))
     }
 }
 
