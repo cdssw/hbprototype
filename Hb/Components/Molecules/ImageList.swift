@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ImageList: View {
+    var images: [File]
+    
     var body: some View {
         NavigationView {
             List {
-                ImageSlider()
+                ImageSlider(images: images)
                     .frame(height: 300)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .navigationBarTitle("Image Slider", displayMode: .large)
@@ -22,6 +24,6 @@ struct ImageList: View {
 
 struct ImageList_Previews: PreviewProvider {
     static var previews: some View {
-        ImageList()
+        ImageList(images: [File.getDummy(), File.getDummy()])
     }
 }

@@ -9,19 +9,20 @@ import SwiftUI
 
 struct ImageSlider: View {
     @State var index = 0
-    private let images = [Constant.IMAGE_SERVER + "avatar/2022-11-23/b74fd2f1-d7fe-409b-92af-67f9fa94c688.jpg", Constant.IMAGE_SERVER + "avatar/2022-11-23/b74fd2f1-d7fe-409b-92af-67f9fa94c688.jpg"]
-    
     @State private var page = 0
     @State private var bounce: Bool = false
+    
+    var images: [File]
     
     var body: some View {
         ImageSliderModifier(index: $index.animation(), maxIndex: images.count - 1) {
             ForEach(self.images, id: \.self) { image in
-                AsyncImage(url: URL(string: image)) { img in
+                let path = Constant.IMAGE_SERVER + image.path + "/" + image.chgFileNm
+                AsyncImage(url: URL(string: path)) { img in
                     img.resizable()
                         .aspectRatio(contentMode: .fill)
                 } placeholder: {
-                    Text("")
+                    Color.gray
                 }
             }
         }
@@ -30,7 +31,7 @@ struct ImageSlider: View {
 
 struct ImageSlider_Previews: PreviewProvider {
     static var previews: some View {
-        ImageSlider()
+        ImageSlider(images: [File.getDummy(), File.getDummy()])
             .previewLayout(.fixed(width: 400, height: 300))
     }
 }

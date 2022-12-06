@@ -17,9 +17,9 @@
 		4222334727FEB3E0001D880C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334627FEB3E0001D880C /* Extension.swift */; };
 		4222334927FEB49F001D880C /* Meet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334827FEB49F001D880C /* Meet.swift */; };
 		422998F5293ECDBB00B84414 /* ImageSliderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422998F4293ECDBB00B84414 /* ImageSliderModifier.swift */; };
+		422998F7293F0EC900B84414 /* FileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422998F6293F0EC900B84414 /* FileViewModel.swift */; };
 		422CDC1B292DDADC00100971 /* CustomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422CDC1A292DDADC00100971 /* CustomExtension.swift */; };
 		422CDC1D292E071100100971 /* ImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422CDC1C292E071100100971 /* ImageSlider.swift */; };
-		422CDC1F292E089800100971 /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422CDC1E292E089800100971 /* ImageList.swift */; };
 		423EA18C27DDE87D00250897 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EA18B27DDE87D00250897 /* HomeView.swift */; };
 		423EA19027DDE93300250897 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EA18F27DDE93300250897 /* Environment.swift */; };
 		4255063727DC455F0022D4F3 /* JoinStep2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4255063627DC455F0022D4F3 /* JoinStep2View.swift */; };
@@ -65,9 +65,9 @@
 		4222334627FEB3E0001D880C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		4222334827FEB49F001D880C /* Meet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meet.swift; sourceTree = "<group>"; };
 		422998F4293ECDBB00B84414 /* ImageSliderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSliderModifier.swift; sourceTree = "<group>"; };
+		422998F6293F0EC900B84414 /* FileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewModel.swift; sourceTree = "<group>"; };
 		422CDC1A292DDADC00100971 /* CustomExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtension.swift; sourceTree = "<group>"; };
 		422CDC1C292E071100100971 /* ImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlider.swift; sourceTree = "<group>"; };
-		422CDC1E292E089800100971 /* ImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
 		423EA18B27DDE87D00250897 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		423EA18F27DDE93300250897 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		4255063627DC455F0022D4F3 /* JoinStep2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinStep2View.swift; sourceTree = "<group>"; };
@@ -263,7 +263,6 @@
 				426C0FFD28053EA7008AD102 /* HeaderView.swift */,
 				42D0633F27FC0D67007AC9BD /* CardView.swift */,
 				422CDC1C292E071100100971 /* ImageSlider.swift */,
-				422CDC1E292E089800100971 /* ImageList.swift */,
 				422998F4293ECDBB00B84414 /* ImageSliderModifier.swift */,
 			);
 			path = Molecules;
@@ -294,6 +293,7 @@
 			children = (
 				427D86C627FFCBC9002B1B8D /* File.swift */,
 				42929270291E169900B163FB /* FileService.swift */,
+				422998F6293F0EC900B84414 /* FileViewModel.swift */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -383,7 +383,6 @@
 				428E275A27D45D3400046988 /* HbTextFieldStyle.swift in Sources */,
 				428E275427D45A5C00046988 /* IntroView.swift in Sources */,
 				42DEC43228000F8500792326 /* Helper.swift in Sources */,
-				422CDC1F292E089800100971 /* ImageList.swift in Sources */,
 				42E427CE2938292400B202B6 /* NavigationBarModifier.swift in Sources */,
 				428E275627D45B0F00046988 /* LoginView.swift in Sources */,
 				427D86C727FFCBC9002B1B8D /* File.swift in Sources */,
@@ -396,6 +395,7 @@
 				422CDC1B292DDADC00100971 /* CustomExtension.swift in Sources */,
 				426C0FFE28053EA7008AD102 /* HeaderView.swift in Sources */,
 				42929271291E169900B163FB /* FileService.swift in Sources */,
+				422998F7293F0EC900B84414 /* FileViewModel.swift in Sources */,
 				4255063F27DC777C0022D4F3 /* JoinStep4View.swift in Sources */,
 				4255064527DC86750022D4F3 /* JoinFinishView.swift in Sources */,
 				42793DB527D62E6B00B6B9F9 /* KeyboardDismiss.swift in Sources */,

@@ -12,6 +12,7 @@ struct ContentsView: View {
     @StateObject private var keyboardHandler = KeyboardHandler()
     @FocusState private var focusedField: FocusField?
     @ObservedObject var meetViewModel = MeetViewModel()
+    @ObservedObject var fileViewModel = FileViewModel()
     @State private var isImage: Bool = true
     
     var meet: Meet
@@ -20,14 +21,15 @@ struct ContentsView: View {
         ZStack {
             // image가 있으면 image 표시 적용된 ContentMeet 표시
             if self.meet.imgList.count > 0 {
-                ContentMeet(meet: meet, isImage: $isImage)
-                    .ignoresSafeArea()
+                ContentMeet(meet: meet, images: fileViewModel.fileList, isImage: $isImage)
+                    .edgesIgnoringSafeArea(.all)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: HbBackButton(imageYn: self.isImage))
                     .navigationBarTitle("")
                     .navigationBarTitleDisplayMode(.inline)
-                    .onAppear {
+                    .onAppear() {
                         self.meetViewModel.getMeet(meet.id)
+                        self.fileViewModel.postImagesPath(meet.imgList)
                     }
                     .navigationBarBackground {
                         // 네비게이션 배경을 image 표시영역에 따른 변경처리
@@ -47,10 +49,10 @@ struct ContentsView: View {
                     .onAppear {
                         self.meetViewModel.getMeet(meet.id)
                     }
-                    .navigationBarBackground {
-                        // 배경은 흰색으로 고정
-                        Color.white
-                    }
+//                    .navigationBarBackground {
+//                        // 배경은 흰색으로 고정
+//                        Color.white
+//                    }
             }
         }
     }
@@ -58,8 +60,16 @@ struct ContentsView: View {
 
 struct ContentMeet: View {
     var meet: Meet
+    var images: [File?] = []
     @Binding var isImage: Bool
     @State private var offsetY: CGFloat = .zero
+    
+    func setOffset(offset: CGFloat) -> some View {
+        DispatchQueue.main.async {
+            self.offsetY = offset
+        }
+        return EmptyView()
+    }
     
     var body: some View {
         ZStack {
@@ -68,7 +78,10 @@ struct ContentMeet: View {
                 if self.meet.imgList.count > 0 {
                     GeometryReader { geometry in
                         let offset = geometry.frame(in: .global).minY
-                        ImageSlider()
+                        setOffset(offset: offset)
+                        ZStack {
+                            ImageSlider(images: images.compactMap { $0 })
+                        }
                         .frame(
                             width: geometry.size.width,
                             height: 400 + (offset > 0 ? offset : 0)
@@ -108,14 +121,14 @@ struct ContentMeet: View {
                     self.isImage = true
                 }
             }
-            .overlay(
-                Rectangle()
-                    .foregroundColor(.black)
-                    .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
-                    .edgesIgnoringSafeArea(.all)
-                    .opacity(offsetY > -400 ? 0 : 1)
-                , alignment: .top
-            )
+//            .overlay(
+//                Rectangle()
+//                    .foregroundColor(.black)
+//                    .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
+//                    .edgesIgnoringSafeArea(.all)
+//                    .opacity(offsetY > -400 ? 0 : 1)
+//                , alignment: .top
+//            )
         }
     }
 }

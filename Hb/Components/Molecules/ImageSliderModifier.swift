@@ -31,7 +31,7 @@ struct ImageSliderModifier<Content: View>: View {
                             .clipped()
                     }
                 }
-                .content.offset(x: self.offset(in: geometry), y: 0)
+                .content.offset(x: self.offset(in: geometry.size.width), y: 0)
                 .frame(width: geometry.size.width, alignment: .leading)
                 .gesture(
                     DragGesture()
@@ -61,14 +61,20 @@ struct ImageSliderModifier<Content: View>: View {
         }
     }
     
-    // dragging 변수가 set 될때마다 호출됨
-    func offset(in geometry: GeometryProxy) -> CGFloat {
+    // geometry가 변경될때마다 호출됨
+    func offset(in width: CGFloat) -> CGFloat {
         if self.dragging {
             // offset값을 최소 0부터 최대 이미지갯수 * 화면가로사이즈값으로 제한하면서 offset width 값을 리턴
-            return max(min(self.dragOffset.width, 0), -CGFloat(self.maxIndex) * geometry.size.width)
+            if self.dragOffset.width != 0 {
+                // updating시 설정된 dragOffset이 초기화 되지 않았으면 해당 위치로 이동
+                return max(min(self.dragOffset.width, 0), -CGFloat(self.maxIndex) * width)
+            } else {
+                // 초기화 되었으면(아래로 제스처 되었으면) 이미지 인덱스 기준 위치로 이동
+                return -CGFloat(self.index) * width
+            }
         } else {
             // dragging 중이 아닌 경우에는 현재 index기준으로 화면가로사이즈 위치값 리턴
-            return -CGFloat(self.index) * geometry.size.width
+            return -CGFloat(self.index) * width
         }
     }
     
@@ -88,10 +94,12 @@ struct PageControl: View {
     var body: some View {
         HStack {
             Spacer()
-            ForEach(0...maxIndex, id: \.self) { index in
-                Circle()
-                    .fill(index == self.index ? Color.white : Color.white.opacity(0.2))
-                    .frame(width: 8, height: 8)
+            if maxIndex >= 0 {
+                ForEach(0...maxIndex, id: \.self) { index in
+                    Circle()
+                        .fill(index == self.index ? Color.white : Color.white.opacity(0.2))
+                        .frame(width: 8, height: 8)
+                }
             }
             Spacer()
         }

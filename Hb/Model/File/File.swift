@@ -15,7 +15,7 @@ struct FileResponse: Codable {
     var content: [File]
 }
 
-struct File: Codable, Identifiable {
+struct File: Codable, Identifiable, Hashable {
     var id: Int
     var path: String
     var orgFileNm: String
