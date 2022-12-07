@@ -49,10 +49,10 @@ struct ContentsView: View {
                     .onAppear {
                         self.meetViewModel.getMeet(meet.id)
                     }
-//                    .navigationBarBackground {
-//                        // 배경은 흰색으로 고정
-//                        Color.white
-//                    }
+                    .navigationBarBackground {
+                        // 배경은 흰색으로 고정
+                        Color.white
+                    }
             }
         }
     }
