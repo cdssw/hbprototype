@@ -63,34 +63,27 @@ struct ContentMeet: View {
     var images: [File?] = []
     @Binding var isImage: Bool
     @State private var offsetY: CGFloat = .zero
-    
-    func setOffset(offset: CGFloat) -> some View {
-        DispatchQueue.main.async {
-            self.offsetY = offset
-        }
-        return EmptyView()
-    }
+    private let height: CGFloat = 400
     
     var body: some View {
         ZStack {
-            ScrollView {
+            ObservableScrollView(scrollOffset: $offsetY) { proxy in
                 // image 존재여부에 따른 ImageSlider 표시
                 if self.meet.imgList.count > 0 {
                     GeometryReader { geometry in
                         let offset = geometry.frame(in: .global).minY
-                        setOffset(offset: offset)
                         ZStack {
                             ImageSlider(images: images.compactMap { $0 })
                         }
                         .frame(
                             width: geometry.size.width,
-                            height: 400 + (offset > 0 ? offset : 0)
+                            height: height + (offset > 0 ? offset : 0)
                         )
                         .offset(
                             y: (offset > 0 ? -offset: 0)
                         )
                     }
-                    .frame(minHeight: 400)
+                    .frame(minHeight: height)
                 }
                 VStack {
                     UserWithCost(meet: meet)
@@ -106,29 +99,22 @@ struct ContentMeet: View {
                     Spacer()
                 }
                 .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
-                GeometryReader { geometry in
-                    // 스크롤의 현재 offset을 구해옴
-                    let offset = geometry.frame(in: .named("scroll")).minY
-                    Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
-                }
             }
-            .coordinateSpace(name: "scroll") // scroll offset조절을 위한 이름 정의
-            .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-                // scroll이 변경될때마다 체크하여 네비게이션 배경색 변경처리를 위한 변수 수정
-                if value < 400 {
+            .onChange(of: offsetY, perform: { newValue in
+                if offsetY > 260 {
                     self.isImage = false
                 } else {
                     self.isImage = true
                 }
-            }
-//            .overlay(
-//                Rectangle()
-//                    .foregroundColor(.black)
-//                    .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
-//                    .edgesIgnoringSafeArea(.all)
-//                    .opacity(offsetY > -400 ? 0 : 1)
-//                , alignment: .top
-//            )
+            })
+            .overlay(
+                Rectangle()
+                    .foregroundColor(.black)
+                    .frame(height: (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.safeAreaInsets.top) 
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(offsetY > -height ? 0 : 1)
+                , alignment: .top
+            )
         }
     }
 }

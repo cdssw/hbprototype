@@ -20,7 +20,7 @@ struct IntroView: View {
             NavigationView {
                 VStack {
                     Spacer()
-                    Text("해바")
+                    Text("HB")
                         .font(.system(size: 50))
                         .fontWeight(.bold)
                         .padding(30)

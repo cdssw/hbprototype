@@ -31,7 +31,7 @@ struct LoginView: View {
                     })
                 )
             VStack {
-                Text("해바")
+                Text("HB")
                     .font(.system(size: 50))
                     .fontWeight(.bold)
                 Spacer()
