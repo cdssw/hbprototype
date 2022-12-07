@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct MainView: View{
-    @ObservedObject var meetViewModel = MeetViewModel()
+    @ObservedObject var meetViewModel: MeetViewModel = MeetViewModel()
     
     init() {
-        print(#fileID, #function, #line, "")
-        // 생성자가 호출되면 바로 데이터를 조회
         let paging: Paging = Paging(page: meetViewModel.page)
         meetViewModel.getMeetList(paging)
     }
@@ -24,7 +22,8 @@ struct MainView: View{
                 ScrollView {
                     LazyVStack {
                         ForEach(Array(zip(meetViewModel.meetList.indices, meetViewModel.meetList)), id:\.0) { index, meet in
-                            NavigationLink(destination: ContentsView(meet: meet)) {
+                            NavigationLink(destination: ContentsView(meetId: meet.id)) {
+//                            NavigationLink(destination: ContentsView(meet: meet)) {
                                 CardView(meet: meet)
                                     .onAppear {
                                         // 마지막 index가 표시되면 다음 페이지를 로딩한다.

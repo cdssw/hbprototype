@@ -11,12 +11,11 @@ struct ImageSlider: View {
     @State var index = 0
     @State private var page = 0
     @State private var bounce: Bool = false
-    
-    var images: [File]
+    @ObservedObject var fileViewModel: FileViewModel
     
     var body: some View {
-        ImageSliderModifier(index: $index.animation(), maxIndex: images.count - 1) {
-            ForEach(self.images, id: \.self) { image in
+        ImageSliderModifier(index: $index.animation(), maxIndex: fileViewModel.fileList.count - 1) {
+            ForEach(fileViewModel.fileList, id: \.self) { image in
                 let path = Constant.IMAGE_SERVER + image.path + "/" + image.chgFileNm
                 AsyncImage(url: URL(string: path)) { img in
                     img.resizable()
@@ -31,7 +30,7 @@ struct ImageSlider: View {
 
 struct ImageSlider_Previews: PreviewProvider {
     static var previews: some View {
-        ImageSlider(images: [File.getDummy(), File.getDummy()])
+        ImageSlider(fileViewModel: FileViewModel())
             .previewLayout(.fixed(width: 400, height: 300))
     }
 }

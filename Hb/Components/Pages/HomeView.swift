@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var meetViewModel = MeetViewModel()
     @StateObject var viewRouter: ViewRouter
     @State var currentTab: String = "Home"
     

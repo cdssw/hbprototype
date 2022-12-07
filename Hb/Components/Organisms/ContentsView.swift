@@ -11,56 +11,66 @@ struct ContentsView: View {
     @EnvironmentObject var userInfo: UserInfo
     @StateObject private var keyboardHandler = KeyboardHandler()
     @FocusState private var focusedField: FocusField?
-    @ObservedObject var meetViewModel = MeetViewModel()
-    @ObservedObject var fileViewModel = FileViewModel()
+    @StateObject var meetViewModel: MeetViewModel = MeetViewModel()
+    @StateObject var fileViewModel: FileViewModel = FileViewModel()
     @State private var isImage: Bool = true
     
-    var meet: Meet
+//    var meet: Meet
+    var meetId: Int
     
     var body: some View {
         ZStack {
             // image가 있으면 image 표시 적용된 ContentMeet 표시
-            if self.meet.imgList.count > 0 {
-                ContentMeet(meet: meet, images: fileViewModel.fileList, isImage: $isImage)
-                    .edgesIgnoringSafeArea(.all)
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: HbBackButton(imageYn: self.isImage))
-                    .navigationBarTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .onAppear() {
-                        self.meetViewModel.getMeet(meet.id)
-                        self.fileViewModel.postImagesPath(meet.imgList)
-                    }
-                    .navigationBarBackground {
-                        // 네비게이션 배경을 image 표시영역에 따른 변경처리
-                        if self.isImage {
-                            Color.clear
-                        } else {
+            if let meet = meetViewModel.meet {
+                if meet.imgList.count > 0 {
+                    ContentMeet(meet: meet, fileViewModel: fileViewModel, isImage: $isImage)
+                        .edgesIgnoringSafeArea(.all)
+                        .navigationBarBackButtonHidden(true)
+                        .navigationBarItems(leading: HbBackButton(imageYn: self.isImage))
+                        .navigationBarTitle("")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .onAppear() {
+                            self.fileViewModel.postImagesPath(meet.imgList)
+                        }
+                        .navigationBarBackground {
+                            // 네비게이션 배경을 image 표시영역에 따른 변경처리
+                            if self.isImage {
+                                Color.clear
+                            } else {
+                                Color.white
+                            }
+                        }
+                } else {
+                    // image가 없으면 일반 형식으로 표시
+                    ContentMeet(meet: meet, fileViewModel: fileViewModel, isImage: $isImage)
+                        .navigationBarBackButtonHidden(true)
+                        .navigationBarItems(leading: HbBackButton(imageYn: false))
+                        .navigationBarTitle("상세보기")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarBackground {
+                            // 배경은 흰색으로 고정
                             Color.white
                         }
-                    }
+                }
             } else {
-                // image가 없으면 일반 형식으로 표시
-                ContentMeet(meet: meet, isImage: $isImage)
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: HbBackButton(imageYn: self.isImage))
-                    .navigationBarTitle("상세보기")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .onAppear {
-                        self.meetViewModel.getMeet(meet.id)
-                    }
-                    .navigationBarBackground {
-                        // 배경은 흰색으로 고정
-                        Color.white
-                    }
+                GeometryReader { geometry in
+                    Color.clear
+                        .frame(height: geometry.size.height)
+                }
+                .navigationBarBackground {
+                    Color.clear
+                }
             }
+        }
+        .onAppear() {
+            self.meetViewModel.getMeet(meetId)
         }
     }
 }
 
 struct ContentMeet: View {
     var meet: Meet
-    var images: [File?] = []
+    @ObservedObject var fileViewModel: FileViewModel
     @Binding var isImage: Bool
     @State private var offsetY: CGFloat = .zero
     private let height: CGFloat = 400
@@ -73,7 +83,7 @@ struct ContentMeet: View {
                     GeometryReader { geometry in
                         let offset = geometry.frame(in: .global).minY
                         ZStack {
-                            ImageSlider(images: images.compactMap { $0 })
+                            ImageSlider(fileViewModel: fileViewModel)
                         }
                         .frame(
                             width: geometry.size.width,
@@ -83,7 +93,7 @@ struct ContentMeet: View {
                             y: (offset > 0 ? -offset: 0)
                         )
                     }
-                    .frame(minHeight: height)
+                    .frame(height: height)
                 }
                 VStack {
                     UserWithCost(meet: meet)
@@ -110,7 +120,7 @@ struct ContentMeet: View {
             .overlay(
                 Rectangle()
                     .foregroundColor(.black)
-                    .frame(height: (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.safeAreaInsets.top) 
+                    .frame(height: (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.safeAreaInsets.top)
                     .edgesIgnoringSafeArea(.all)
                     .opacity(offsetY > -height ? 0 : 1)
                 , alignment: .top
@@ -224,7 +234,8 @@ struct TimeAndLocation: View {
 
 struct ContentsView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentsView(meet: Meet.getDummy())
+        ContentsView(meetId: Meet.getDummy().id)
+//        ContentsView(meet: Meet.getDummy())
             .environmentObject(UserInfo())
     }
 }
