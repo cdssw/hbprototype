@@ -93,7 +93,7 @@ struct ContentMeet: View {
                             y: (offset > 0 ? -offset: 0)
                         )
                     }
-                    .frame(height: height)
+                    .frame(minHeight: height)
                 }
                 VStack {
                     UserWithCost(meet: meet)
