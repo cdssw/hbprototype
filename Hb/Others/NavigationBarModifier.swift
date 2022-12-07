@@ -32,7 +32,7 @@ struct NavigationBarModifier<Background>: ViewModifier where Background: View {
                     .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 0, alignment: .center)
                 Spacer()
             }
-            .animation(.default) // safeArea 표시를 애니메이션 처리
+            .animation(.default, value: UUID()) // safeArea 표시를 애니메이션 처리
         }
     }
 }
