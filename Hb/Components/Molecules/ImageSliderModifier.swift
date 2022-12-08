@@ -34,20 +34,24 @@ struct ImageSliderModifier<Content: View>: View {
                 .content.offset(x: self.offset(in: geometry.size.width), y: 0)
                 .frame(width: geometry.size.width, alignment: .leading)
                 .gesture(
-                    DragGesture()
+                    DragGesture(minimumDistance: 10)
                         .onChanged { value in
-                            // drag가 발생하면 dragging변수를 설정
-                            self.dragging = true
+                            if value.startLocation.x > 10 {
+                                // drag가 발생하면 dragging변수를 설정
+                                self.dragging = true
+                            }
                         }
                         .onEnded { value in
-                            // end 이벤트가 발생한 가로사이즈 위치를 가져옴
-                            let predictedEndOffset = -CGFloat(self.index) * geometry.size.width + value.predictedEndTranslation.width
-                            // end 이벤트가 발생한 위치를 기준으로 가로화면을 나눠서 몇번째 인덱스인지 가져옴
-                            let predictedIndex = Int(round(predictedEndOffset / -geometry.size.width))
-                            // 최종 index를 설정
-                            self.index = self.clampedIndex(from: predictedIndex)
-                            withAnimation(.easeOut) {
-                                self.dragging = false
+                            if value.startLocation.x > 10 {
+                                // end 이벤트가 발생한 가로사이즈 위치를 가져옴
+                                let predictedEndOffset = -CGFloat(self.index) * geometry.size.width + value.predictedEndTranslation.width
+                                // end 이벤트가 발생한 위치를 기준으로 가로화면을 나눠서 몇번째 인덱스인지 가져옴
+                                let predictedIndex = Int(round(predictedEndOffset / -geometry.size.width))
+                                // 최종 index를 설정
+                                self.index = self.clampedIndex(from: predictedIndex)
+                                withAnimation(.easeOut) {
+                                    self.dragging = false
+                                }
                             }
                         }
                         .updating($dragOffset) { value, state, transaction in

@@ -25,7 +25,9 @@ class FileViewModel: ObservableObject {
                     print(#fileID, #function, #line, "finished")
                 }
             } receiveValue: { (result:[File]) in
-                self.fileList = result
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                    self.fileList = result
+                }
             }.store(in: &subscription)
     }
 }

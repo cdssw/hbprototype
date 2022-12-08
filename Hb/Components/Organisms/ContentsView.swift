@@ -54,12 +54,18 @@ struct ContentsView: View {
                 }
             } else {
                 GeometryReader { geometry in
-                    Color.clear
+                    Color.gray
                         .frame(height: geometry.size.height)
                 }
+                .edgesIgnoringSafeArea(.all)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: HbBackButton(imageYn: self.isImage))
+                .navigationBarTitle("")
+                .navigationBarTitleDisplayMode(.inline)
                 .navigationBarBackground {
                     Color.clear
                 }
+                .animation(.default, value: UUID())
             }
         }
         .onAppear() {

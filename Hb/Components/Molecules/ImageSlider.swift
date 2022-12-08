@@ -25,6 +25,7 @@ struct ImageSlider: View {
                 }
             }
         }
+        .animation(.default, value: UUID())
     }
 }
 

@@ -17,11 +17,9 @@ struct CardView: View {
             .overlay(
                 HStack(spacing: 0) {
                     if let img = meet.img {
-                        AsyncImage(url: URL(string: img)) { image in
-                            image.resizable()
-                        } placeholder: {
-                            Text("")
-                        }
+                        AsyncImage(url: URL(string: img),
+                                   transaction: .init(animation: .linear),
+                                   content: view)
                         .frame(width: 123, height: 110)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .background(Color(0xD3D3D3))
@@ -78,6 +76,28 @@ struct CardView: View {
             .foregroundColor(.white)
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
     }
+    
+    @ViewBuilder
+        private func view(for phase: AsyncImagePhase) -> some View {
+            switch phase {
+            case .empty:
+                Color.gray
+                    .animation(.default)
+            case .success(let image):
+                image
+                    .resizable()
+            case .failure(let error):
+                VStack(spacing: 16) {
+                    Image(systemName: "xmark.octagon.fill")
+                        .foregroundColor(.red)
+                    Text(error.localizedDescription)
+                        .multilineTextAlignment(.center)
+                }
+            @unknown default:
+                Text("Unknown")
+                    .foregroundColor(.gray)
+            }
+        }
 }
 
 struct CardView_Previews: PreviewProvider {
