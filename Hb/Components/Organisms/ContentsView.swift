@@ -15,7 +15,6 @@ struct ContentsView: View {
     @StateObject var fileViewModel: FileViewModel = FileViewModel()
     @State private var isImage: Bool = true
     
-//    var meet: Meet
     var meetId: Int
     
     var body: some View {
@@ -24,7 +23,6 @@ struct ContentsView: View {
             if let meet = meetViewModel.meet {
                 if meet.imgList.count > 0 {
                     ContentMeet(meet: meet, fileViewModel: fileViewModel, isImage: $isImage)
-                        .edgesIgnoringSafeArea(.all)
                         .navigationBarBackButtonHidden(true)
                         .navigationBarItems(leading: HbBackButton(imageYn: self.isImage))
                         .navigationBarTitle("")
@@ -48,7 +46,6 @@ struct ContentsView: View {
                         .navigationBarTitle("상세보기")
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarBackground {
-                            // 배경은 흰색으로 고정
                             Color.white
                         }
                 }
@@ -82,56 +79,56 @@ struct ContentMeet: View {
     private let height: CGFloat = 400
     
     var body: some View {
-        ZStack {
-            ObservableScrollView(scrollOffset: $offsetY) { proxy in
-                // image 존재여부에 따른 ImageSlider 표시
-                if self.meet.imgList.count > 0 {
-                    GeometryReader { geometry in
-                        let offset = geometry.frame(in: .global).minY
-                        ZStack {
-                            ImageSlider(fileViewModel: fileViewModel)
-                        }
-                        .frame(
-                            width: geometry.size.width,
-                            height: height + (offset > 0 ? offset : 0)
-                        )
-                        .offset(
-                            y: (offset > 0 ? -offset: 0)
-                        )
+        ObservableScrollView(scrollOffset: $offsetY) { proxy in
+            // image 존재여부에 따른 ImageSlider 표시
+            if self.meet.imgList.count > 0 {
+                GeometryReader { geometry in
+                    let offset = geometry.frame(in: .global).minY
+                    ZStack {
+                        ImageSlider(fileViewModel: fileViewModel)
                     }
-                    .frame(minHeight: height)
+                    .frame(
+                        width: geometry.size.width,
+                        height: height + (offset > 0 ? offset : 0)
+                    )
+                    .offset(
+                        y: (offset > 0 ? -offset: 0)
+                    )
                 }
-                VStack {
-                    UserWithCost(meet: meet)
-                    Divider()
-                    TitleWithMessageAndAppl(meet: meet)
-                    TimeAndLocation(meet: meet)
-                    HStack {
-                        Text(meet.content)
-                            .foregroundColor(Color(0x797979))
-                            .font(.body)
+                .frame(minHeight: height)
+            }
+            LazyVStack(pinnedViews: [.sectionHeaders]) {
+                Section(header: UserWithCost(meet: meet)) {
+                    VStack {
+                        TitleWithMessageAndAppl(meet: meet)
+                        TimeAndLocation(meet: meet)
+                        HStack {
+                            Text(meet.content)
+                                .foregroundColor(Color(0x797979))
+                                .font(.body)
+                            Spacer()
+                        }
                         Spacer()
                     }
-                    Spacer()
                 }
-                .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
             }
-            .onChange(of: offsetY, perform: { newValue in
-                if offsetY > 260 {
-                    self.isImage = false
-                } else {
-                    self.isImage = true
-                }
-            })
-            .overlay(
-                Rectangle()
-                    .foregroundColor(.black)
-                    .frame(height: (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.safeAreaInsets.top)
-                    .edgesIgnoringSafeArea(.all)
-                    .opacity(offsetY > -height ? 0 : 1)
-                , alignment: .top
-            )
+            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
         }
+        .onChange(of: offsetY, perform: { newValue in
+            if offsetY > 260 {
+                self.isImage = false
+            } else {
+                self.isImage = true
+            }
+        })
+        .overlay(
+            Rectangle()
+                .foregroundColor(.white)
+                .frame(height: (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.safeAreaInsets.top)
+                .edgesIgnoringSafeArea(.all)
+                .opacity(offsetY > -height ? 0 : 1)
+            , alignment: .top
+        )
     }
 }
 
@@ -139,38 +136,44 @@ struct UserWithCost: View {
     var meet: Meet
     
     var body: some View {
-        HStack {
-            if let avatar = meet.user.avatarPath {
-                let path = Constant.IMAGE_SERVER + avatar
-                AsyncImage(url: URL(string: path)) { image in
-                    image.resizable()
-                } placeholder: {
-                    Text("")
+        VStack {
+            HStack {
+                if let avatar = meet.user.avatarPath {
+                    let path = Constant.IMAGE_SERVER + avatar
+                    AsyncImage(url: URL(string: path)) { image in
+                        image.resizable()
+                    } placeholder: {
+                        Text("")
+                    }
+                    .frame(width: 40, height: 40)
+                    .clipShape(RoundedRectangle(cornerRadius: 50))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 50)
+                            .stroke(Color(0xD3D3D3), lineWidth: 2)
+                    )
+                } else {
+                    Image("avatar")
                 }
-                .frame(width: 40, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 50))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 50)
-                        .stroke(Color(0xD3D3D3), lineWidth: 2)
-                )
-            } else {
-                Image("avatar")
+                Text(meet.user.userNickNm)
+                    .font(.body)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(0x5B5656))
+                Spacer()
+                Text("￦ "+meet.cost.withCommas())
+                    .font(.subheadline)
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    .foregroundColor(Color(0x00AF31))
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color(0x007728), lineWidth: 1)
+                            .frame(height: 26)
+                    )
             }
-            Text(meet.user.userNickNm)
-                .font(.body)
-                .fontWeight(.bold)
-                .foregroundColor(Color(0x5B5656))
-            Spacer()
-            Text("￦ "+meet.cost.withCommas())
-                .font(.subheadline)
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                .foregroundColor(Color(0x00AF31))
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color(0x007728), lineWidth: 1)
-                        .frame(height: 26)
-                )
+            Divider()
         }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(height: 60)
+        .background(Rectangle().foregroundColor(.white))
     }
 }
 
@@ -208,7 +211,6 @@ struct TitleWithMessageAndAppl: View {
                     .foregroundColor(Color(0x797979))
             }
         }
-        
     }
 }
 

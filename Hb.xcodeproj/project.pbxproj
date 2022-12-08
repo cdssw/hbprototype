@@ -282,8 +282,8 @@
 			isa = PBXGroup;
 			children = (
 				4222334827FEB49F001D880C /* Meet.swift */,
-				42E15C8027FEB7E5000A3EE4 /* MeetViewModel.swift */,
 				4292926E291E0A6A00B163FB /* MeetService.swift */,
+				42E15C8027FEB7E5000A3EE4 /* MeetViewModel.swift */,
 			);
 			path = Meet;
 			sourceTree = "<group>";
