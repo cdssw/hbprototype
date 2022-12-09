@@ -17,7 +17,7 @@ class MeetViewModel: ObservableObject {
     @Published var meet: Meet?
     
     func getMeetList(_ paging: Paging) {
-        let listCount = self.meetList.count
+        let listCount = paging.page == 0 ? 0 : self.meetList.count
         MeetService.getMeetList(paging)
             .sink { completion in
                 switch completion {
@@ -27,10 +27,15 @@ class MeetViewModel: ObservableObject {
                     print(#fileID, #function, #line, "finished")
                 }
             } receiveValue: { (result: [Meet]) in
-                if result.count == 0{
+                if result.count == 0 {
                     self.page -= 1
                 } else {
-                    self.meetList += result
+                    if paging.page == 0 {
+                        self.page = 0
+                        self.meetList = result
+                    } else {
+                        self.meetList += result
+                    }
                     for i in 0..<result.count {
                         // 수신된 데이터 중 이미지가 있으면 파일서비스에 이미지 경로 요청
                         if result[i].imgList.count > 0 {

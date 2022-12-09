@@ -51,7 +51,7 @@ struct ContentsView: View {
                 }
             } else {
                 GeometryReader { geometry in
-                    Color.gray
+                    Color.white
                         .frame(height: geometry.size.height)
                 }
                 .edgesIgnoringSafeArea(.all)
