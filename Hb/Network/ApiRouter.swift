@@ -19,7 +19,7 @@ class APIRouter: URLRequestConvertible {
             switch self {
             case .auth:
                 switch environmentMode {
-                case .dev: return "https://auth.dev"
+                case .dev: return "https://cdssw.duckdns.org:9015"
                 case .stg: return "https://auth.stg"
                 case .prd: return "https://auth.prd"
                 }
@@ -70,9 +70,24 @@ class APIRouter: URLRequestConvertible {
         var request = try URLRequest(url: urlComponent.url!, method: httpMethod)
         
         // 5. post이면 json param 추가
-        if httpMethod == .post, let params = parameters {
-            request.httpBody = params
+        if apiType == .service {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            if httpMethod == .post, let params = parameters {
+                request.httpBody = params
+            }
+        } else {
+            if httpMethod == .post, let params = parameters {
+                if let dictionary = try? JSONSerialization.jsonObject(with: params, options: []) as? [String: Any] {
+                    var formData = [String: Any]()
+                    for (name, value) in dictionary {
+                        formData[name] = value
+                    }
+                    let formDataString = (formData.compactMap({ (key, value) -> String in
+                        return "\(key)=\(value)"
+                    }) as Array).joined(separator: "&")
+                    request.httpBody = formDataString.data(using: .utf8)
+                }
+            }
         }
         
         // 6. print to console

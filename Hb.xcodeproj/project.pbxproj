@@ -12,6 +12,9 @@
 		4205F9CB27D3447000A2CCDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4205F9CA27D3447000A2CCDE /* Assets.xcassets */; };
 		4205F9CE27D3447000A2CCDE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4205F9CD27D3447000A2CCDE /* Preview Assets.xcassets */; };
 		4205F9DD27D3513F00A2CCDE /* HbButtonStyleFill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4205F9DC27D3513F00A2CCDE /* HbButtonStyleFill.swift */; };
+		421845262946B031001DFB9F /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421845252946B031001DFB9F /* Authorization.swift */; };
+		421845282946B0CA001DFB9F /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421845272946B0CA001DFB9F /* AuthorizationViewModel.swift */; };
+		4218452A2946B0F1001DFB9F /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421845292946B0F1001DFB9F /* AuthorizationService.swift */; };
 		4222334227FE7975001D880C /* LabelStyleOnRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334127FE7975001D880C /* LabelStyleOnRight.swift */; };
 		4222334527FEB2C7001D880C /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334427FEB2C7001D880C /* ApiRouter.swift */; };
 		4222334727FEB3E0001D880C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222334627FEB3E0001D880C /* Extension.swift */; };
@@ -60,6 +63,9 @@
 		4205F9CA27D3447000A2CCDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4205F9CD27D3447000A2CCDE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4205F9DC27D3513F00A2CCDE /* HbButtonStyleFill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HbButtonStyleFill.swift; sourceTree = "<group>"; };
+		421845252946B031001DFB9F /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
+		421845272946B0CA001DFB9F /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
+		421845292946B0F1001DFB9F /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
 		4222334127FE7975001D880C /* LabelStyleOnRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyleOnRight.swift; sourceTree = "<group>"; };
 		4222334427FEB2C7001D880C /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		4222334627FEB3E0001D880C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -173,6 +179,16 @@
 			path = Atomic;
 			sourceTree = "<group>";
 		};
+		421845222946AEBE001DFB9F /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				421845252946B031001DFB9F /* Authorization.swift */,
+				421845272946B0CA001DFB9F /* AuthorizationViewModel.swift */,
+				421845292946B0F1001DFB9F /* AuthorizationService.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
 		4222334327FEB2B5001D880C /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +249,7 @@
 		42737AC727DD88F800E105F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				421845222946AEBE001DFB9F /* Authorization */,
 				42DAAA49291CD70C00543A4D /* File */,
 				42DAAA48291CD70000543A4D /* Meet */,
 			);
@@ -397,16 +414,19 @@
 				42929271291E169900B163FB /* FileService.swift in Sources */,
 				422998F7293F0EC900B84414 /* FileViewModel.swift in Sources */,
 				4255063F27DC777C0022D4F3 /* JoinStep4View.swift in Sources */,
+				4218452A2946B0F1001DFB9F /* AuthorizationService.swift in Sources */,
 				4255064527DC86750022D4F3 /* JoinFinishView.swift in Sources */,
 				42793DB527D62E6B00B6B9F9 /* KeyboardDismiss.swift in Sources */,
 				4222334527FEB2C7001D880C /* ApiRouter.swift in Sources */,
 				4205F9C727D3446E00A2CCDE /* HbApp.swift in Sources */,
+				421845282946B0CA001DFB9F /* AuthorizationViewModel.swift in Sources */,
 				423EA18C27DDE87D00250897 /* HomeView.swift in Sources */,
 				426C0FFB280534CE008AD102 /* ViewRouter.swift in Sources */,
 				42C9428C28068826009BF38C /* ContentsView.swift in Sources */,
 				4255063927DC59DD0022D4F3 /* HbUINavigationController.swift in Sources */,
 				427713B627D874E30001E900 /* KeyboardHandler.swift in Sources */,
 				4255063D27DC73D80022D4F3 /* JoinStep3View.swift in Sources */,
+				421845262946B031001DFB9F /* Authorization.swift in Sources */,
 				4255064127DC792B0022D4F3 /* JoinStep5View.swift in Sources */,
 				4255064327DC7C2B0022D4F3 /* FavoriteView.swift in Sources */,
 				4222334927FEB49F001D880C /* Meet.swift in Sources */,

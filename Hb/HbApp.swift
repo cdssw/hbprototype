@@ -13,6 +13,7 @@ struct HbApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(UserInfo())
+                .environmentObject(AuthorizationViewModel())
         }
     }
 }
