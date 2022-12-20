@@ -8,14 +8,14 @@
 import SwiftUI
 struct IntroView: View {
     @EnvironmentObject var userInfo: UserInfo
+    @EnvironmentObject var authorizationViewModel: AuthorizationViewModel
     @StateObject var viewRouter = ViewRouter()
     @State private var showingAlert: Bool = false
     @State private var showJoin: Bool = false
     
     var body: some View {
-        if userInfo.isLogged {
+        if authorizationViewModel.getTokenOnKeyChain() != "" {
             HomeView(viewRouter: viewRouter)
-//            HomeView()
         } else {
             NavigationView {
                 VStack {

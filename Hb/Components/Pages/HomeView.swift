@@ -59,12 +59,7 @@ struct HomeView: View {
                 }
             }
             VStack {
-                Text("User")
-                    .frame(maxHeight: .infinity)
-                Rectangle()
-                    .fill(.clear)
-                    .frame(height: 10)
-                    .overlay(Divider(), alignment: .top)
+                UserView()
             }
             .tabItem {
                 GeometryReader { geometry in

@@ -13,6 +13,7 @@ class UserInfo: ObservableObject {
 
 class Constant {
     static let IMAGE_SERVER = "https://img-server.duckdns.org/images/"
+    static let ACCESS_TOKEN = "accessToken"
 }
 
 enum EnvironmentMode {

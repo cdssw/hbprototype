@@ -38,7 +38,7 @@ class AuthorizationViewModel: ObservableObject {
     func addTokenOnKeyChain(auth: AuthorizationResponse) -> Bool {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: "accessToken",
+            kSecAttrAccount: Constant.ACCESS_TOKEN,
             kSecValueData: auth.accessToken.data(using: String.Encoding.utf8)!
         ]
         let status = SecItemAdd(query as CFDictionary, nil)
@@ -54,7 +54,7 @@ class AuthorizationViewModel: ObservableObject {
     func modTokenOnKeyChain(auth: AuthorizationResponse) -> Bool {
         let prevQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: "accessToken"
+            kSecAttrAccount: Constant.ACCESS_TOKEN
         ]
         let updateQuery: [CFString: Any] = [kSecValueData: auth.accessToken.data(using: String.Encoding.utf8)!]
         let status = SecItemUpdate(prevQuery as CFDictionary, updateQuery as CFDictionary)
@@ -62,6 +62,40 @@ class AuthorizationViewModel: ObservableObject {
             return true
         } else {
             return false
+        }
+    }
+    
+    func getTokenOnKeyChain() -> String {
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: Constant.ACCESS_TOKEN,
+            kSecReturnAttributes: true,
+            kSecReturnData: true
+        ]
+        var item: CFTypeRef?
+        if SecItemCopyMatching(query as CFDictionary, &item) != errSecSuccess {
+            print("read failed")
+            return ""
+        }
+        
+        guard let existingItem = item as? [String: Any] else { return "" }
+        guard let data = existingItem[kSecValueData as String] as? Data else { return "" }
+        guard let apiKey = String(data: data, encoding: .utf8) else { return "" }
+        
+        return apiKey
+    }
+    
+    func delTokenOnKeyChain(key: String) -> Void {
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: key
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        if status == errSecSuccess {
+            print("deleted")
+        } else {
+            print("delete failed")
         }
     }
 }
