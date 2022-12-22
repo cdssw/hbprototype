@@ -26,6 +26,7 @@
 		423EA18C27DDE87D00250897 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EA18B27DDE87D00250897 /* HomeView.swift */; };
 		423EA19027DDE93300250897 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EA18F27DDE93300250897 /* Environment.swift */; };
 		4244C3C229503CBF00F12C3E /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244C3C129503CBF00F12C3E /* UserView.swift */; };
+		424A27642953E84E000BFB69 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424A27632953E84E000BFB69 /* UserInfo.swift */; };
 		4255063727DC455F0022D4F3 /* JoinStep2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4255063627DC455F0022D4F3 /* JoinStep2View.swift */; };
 		4255063927DC59DD0022D4F3 /* HbUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4255063827DC59DD0022D4F3 /* HbUINavigationController.swift */; };
 		4255063B27DC5A060022D4F3 /* FocusField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4255063A27DC5A060022D4F3 /* FocusField.swift */; };
@@ -78,6 +79,7 @@
 		423EA18B27DDE87D00250897 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		423EA18F27DDE93300250897 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		4244C3C129503CBF00F12C3E /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		424A27632953E84E000BFB69 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		4255063627DC455F0022D4F3 /* JoinStep2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinStep2View.swift; sourceTree = "<group>"; };
 		4255063827DC59DD0022D4F3 /* HbUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HbUINavigationController.swift; sourceTree = "<group>"; };
 		4255063A27DC5A060022D4F3 /* FocusField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusField.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				423EA18F27DDE93300250897 /* Environment.swift */,
+				424A27632953E84E000BFB69 /* UserInfo.swift */,
 			);
 			path = Environment;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				4205F9DD27D3513F00A2CCDE /* HbButtonStyleFill.swift in Sources */,
 				4222334227FE7975001D880C /* LabelStyleOnRight.swift in Sources */,
 				4255063B27DC5A060022D4F3 /* FocusField.swift in Sources */,
+				424A27642953E84E000BFB69 /* UserInfo.swift in Sources */,
 				428E275A27D45D3400046988 /* HbTextFieldStyle.swift in Sources */,
 				4244C3C229503CBF00F12C3E /* UserView.swift in Sources */,
 				428E275427D45A5C00046988 /* IntroView.swift in Sources */,

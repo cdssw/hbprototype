@@ -13,8 +13,9 @@ struct UserView: View {
     
     var body: some View {
         Button(action: {
-            authorizationViewModel.delTokenOnKeyChain(key: Constant.ACCESS_TOKEN)
             self.userInfo.isLogged = false
+            let auth = AuthorizationResponse(accessToken: "", tokenType: "", refreshToken: "", expiresIn: 0, scope: "", jti: "")
+            let _ = authorizationViewModel.modTokenOnKeyChain(auth: auth)
         }) {
             Text("로그아웃")
         }
