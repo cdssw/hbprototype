@@ -73,10 +73,11 @@ struct ContentsView: View {
 
 struct ContentMeet: View {
     var meet: Meet
+    private let height: CGFloat = 400
     @ObservedObject var fileViewModel: FileViewModel
     @Binding var isImage: Bool
     @State private var offsetY: CGFloat = .zero
-    private let height: CGFloat = 400
+    @State var isFullImage: Bool = false
     
     var body: some View {
         ObservableScrollView(scrollOffset: $offsetY) { proxy in
@@ -93,6 +94,12 @@ struct ContentMeet: View {
                     )
                     .offset(
                         y: (offset > 0 ? -offset: 0)
+                    )
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onEnded { value in
+                                self.isFullImage = true
+                            }
                     )
                 }
                 .frame(minHeight: height)
@@ -129,6 +136,9 @@ struct ContentMeet: View {
                 .opacity(offsetY > -height ? 0 : 1)
             , alignment: .top
         )
+        .fullScreenCover(isPresented: $isFullImage, content: {
+            FullImageSlider(fileViewModel: fileViewModel)
+        })
     }
 }
 

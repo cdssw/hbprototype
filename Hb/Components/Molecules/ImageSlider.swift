@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ImageSlider: View {
     @State var index = 0
-    @State private var page = 0
-    @State private var bounce: Bool = false
     @ObservedObject var fileViewModel: FileViewModel
     
     var body: some View {
